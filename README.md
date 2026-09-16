@@ -1,4 +1,4 @@
-# CardioSync Pro
+# CardioScreen
 
 Implementasi kode dari desain Stitch `stitch_ecg_monitor_pro` — sudah tersambung
 frontend ↔ backend ↔ database, bukan HTML statis lagi.
