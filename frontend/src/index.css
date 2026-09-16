@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  body {
+    @apply bg-background text-on-background text-body-md antialiased min-h-screen;
+    background-color: #F4F6FA;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+  .icon-filled {
+    font-variation-settings: 'FILL' 1;
+  }
+
+  /* Bisfit Card Style: Rounded 24px/28px, clean white surface, soft subtle shadow */
+  .card {
+    @apply bg-white border border-slate-100/80 rounded-2xl md:rounded-3xl shadow-card-soft transition-shadow duration-200;
+  }
+  
+  .card-subtle {
+    @apply bg-slate-50/70 border border-slate-100 rounded-2xl;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white rounded-full text-headline-sm px-5 py-3
+           hover:bg-primary-hover active:scale-[0.99] transition-all shadow-sm
+           disabled:opacity-50 disabled:cursor-not-allowed
+           flex items-center justify-center gap-2 font-medium;
+  }
+
+  .btn-secondary {
+    @apply bg-slate-900 text-white rounded-full text-body-md px-4 py-2.5
+           hover:bg-slate-800 active:scale-[0.99] transition-all
+           disabled:opacity-50 disabled:cursor-not-allowed
+           flex items-center justify-center gap-1.5 font-medium;
+  }
+
+  .btn-ghost {
+    @apply bg-white border border-slate-200 text-slate-700 rounded-full px-4 py-2.5
+           hover:bg-slate-50 hover:text-slate-900 transition-all
+           disabled:opacity-50 disabled:cursor-not-allowed
+           flex items-center justify-center gap-1.5 font-medium text-body-md shadow-sm;
+  }
+
+  .btn-pill {
+    @apply inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-body-sm font-medium bg-white border border-slate-200/80 text-slate-700 hover:bg-slate-50 transition-colors;
+  }
+
+  .field {
+    @apply w-full px-4 py-2.5 rounded-full border border-slate-200 bg-white text-on-surface text-body-md
+           focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all
+           placeholder:text-slate-400;
+  }
+
+  .table-head {
+    @apply text-label-xs uppercase text-slate-400 font-semibold tracking-wider;
+  }
+
+  .font-vitals {
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Scrollbar halus untuk kontainer scrollable */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 9999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes ekg-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ekg-scroll {
+  animation: ekg-scroll 3.2s linear infinite;
+}
+
+/* Format Khusus Cetak Lembar Medis A4 (Printable Patient Copy) */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm 15mm 15mm;
+  }
+
+  body {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    font-size: 10.5pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Sembunyikan elemen non-dokumen */
+  header,
+  nav,
+  aside,
+  button,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .card,
+  .card-subtle {
+    border: 1px solid #E2E8F0 !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
+  }
+}

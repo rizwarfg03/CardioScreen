@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cardiosync_backend
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    volumes:
+      - cardiosync_data:/app/data
+      - cardiosync_uploads:/app/uploads
+    # We do NOT map ports to host. Only frontend nginx can access it via internal network.
+    networks:
+      - cardiosync_net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cardiosync_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+      # - "443:443" # Uncomment if setting up SSL inside this Nginx directly
+    networks:
+      - cardiosync_net
+
+networks:
+  cardiosync_net:
+    driver: bridge
+
+volumes:
+  cardiosync_data:
+  cardiosync_uploads:

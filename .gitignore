@@ -1,0 +1,16 @@
+# Semua file .env berisi secret asli — JANGAN pernah di-commit.
+# Yang boleh masuk git hanya file *.example (template tanpa secret asli).
+.env
+.env.production
+.env.*.local
+
+# Aman untuk tetap dilacak git, jadi ditulis eksplisit di sini agar jelas
+# tidak ke-skip oleh pola di atas:
+!.env.example
+!.env.production.example
+
+# Dependensi & artefak build (Node sudah dicakup masing-masing di
+# backend/.gitignore dan frontend/.gitignore, ini cuma jaga-jaga kalau
+# ada yang dijalankan dari root)
+node_modules/
+dist/
